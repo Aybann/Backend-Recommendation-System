@@ -4,10 +4,11 @@ const {
   fetchRecords,
 } = require("../controller/generalController");
 const { login, register } = require("../controller/accountController");
+const verifyToken = require("../utils/verifyToken");
 const app = express();
 
 app.post("/", kmeansFunction);
-app.get("/fetchRecords", fetchRecords);
+app.get("/fetchRecords", verifyToken, fetchRecords);
 app.post("/login", login);
 app.post("/register", register)
 
