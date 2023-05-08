@@ -6,6 +6,7 @@ const UserSchema = mongoose.Schema({
     trim: true,
   },
   email: String,
+  checkedItems: Array,
   recommendedCourse: String,
 });
 

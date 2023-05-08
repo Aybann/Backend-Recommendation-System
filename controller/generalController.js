@@ -379,6 +379,7 @@ const kmeansFunction = async (req, res) => {
     const payload = {
       name: userName,
       email: userEmail,
+      checkedItems: userInput,
       recommendedCourse: recommendedProgram.title,
     };
     console.log(
