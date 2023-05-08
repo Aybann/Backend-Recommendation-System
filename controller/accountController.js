@@ -9,18 +9,20 @@ const login = async (req, res) => {
       username: account.username,
     });
 
-    if (!isUserExisting)
+    if (!isUserExisting) {
       return res
         .status(400)
         .send({ message: "User does not exist. Please contact admin" });
+    }
 
     const isPasswordMatch = await bcrypt.compare(
       account.password,
       isUserExisting.password
     );
 
-    if (!isPasswordMatch)
+    if (!isPasswordMatch) {
       return res.status(400).send({ message: "Username/password is invalid" });
+    }
 
     jwt.sign(
       { username: account.username },
@@ -28,7 +30,7 @@ const login = async (req, res) => {
       { expiresIn: 86400 },
       (err, token) => {
         if (err) {
-          res.send({ message: err });
+          return res.status(400).send({ message: err });
         } else {
           res.status(200).send({ message: "Sucess", token: `Bearer ${token}` });
         }
