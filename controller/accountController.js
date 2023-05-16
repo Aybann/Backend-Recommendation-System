@@ -49,8 +49,10 @@ const register = async (req, res) => {
     const isAccountExist = await Account.findOne({
       username: account.username,
     });
-    if (isAccountExist)
-      return res.status(400).send({ message: "Account already exist" });
+
+    if (isAccountExist) {
+      return res.status(400).send({ message: "Username is already taken." });
+    }
 
     const hashedPassword = await bcrypt.hash(account.password, 10);
     const result = await Account.create({
